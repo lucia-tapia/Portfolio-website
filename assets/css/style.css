@@ -1010,3 +1010,19 @@ body { background-image: none; }
 .end-seam { transform: scaleY(calc((var(--lag, 0) + var(--over, 0)) / 90)); }
 /* featured work: keep scrolling even while hovering */
 .ticker__track:hover .ticker__row { animation-play-state: running; }
+
+/* footer: just the links, centered */
+.footer { justify-content: center; text-align: center; }
+.footer__links { justify-content: center; }
+/* archive couch: bigger on desktop, sitting right on the burgundy line; never stretched on phones */
+@media (min-width: 701px) { .arc__couch { top: auto; bottom: -34px; height: calc(var(--tfs) * 3.5 + 40px); } }
+@media (max-width: 700px) { .arc__couch { height: auto; } }
+@media (max-width: 700px) { .arc__couch { top: auto; bottom: -34px; width: 110px; height: auto; } }
+
+/* lookbook: each page is its own 3D layer, so stacking follows z-index (no flicker between pages) */
+.book__inner { transform-style: flat; }
+.leaf { transform: perspective(2600px) rotateY(0deg); will-change: transform; }
+.leaf.is-flipped { transform: perspective(2600px) rotateY(-180deg); }
+.leaf__f, .leaf__b { transform-style: flat; }
+.leaf__b { transform: rotateY(180deg) translateZ(.1px); }
+.leaf__f { transform: translateZ(.1px); }

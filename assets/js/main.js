@@ -244,12 +244,18 @@
     const prevB = wrap.querySelector('[data-book-prev]'), nextB = wrap.querySelector('[data-book-next]'), count = wrap.querySelector('[data-book-count]');
     const max = leaves.length - (leaves[leaves.length - 1].querySelector('.leaf__b--blank') ? 1 : 0);   // the last page stays on the right
     const pages = leaves.length * 2 - (leaves[leaves.length - 1].querySelector('.leaf__b--blank') ? 1 : 0);
-    let k = 0;
+    let k = 0, seq = 0;
+    // load and decode every page before it's needed, so a turning page never flashes blank
+    const warm = () => book.querySelectorAll('img').forEach(im => { im.loading = 'eager'; if (im.decode) im.decode().catch(() => {}); });
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { warm(); io.disconnect(); } }, { rootMargin: '800px 0px' });
+      io.observe(book);
+    } else warm();
     const pad = n => String(n).padStart(2, '0');
     const paint = (dir) => {
       leaves.forEach((l, i) => {
         const was = l.classList.contains('is-flipped'), now = i < k;
-        if (was !== now) { l.classList.add('is-turning'); setTimeout(() => l.classList.remove('is-turning'), 1000); }
+        if (was !== now) { clearTimeout(l._t); l.classList.add('is-turning'); l.style.zIndex = 100 + (++seq); l._t = setTimeout(() => { l.classList.remove('is-turning'); l.style.zIndex = ''; }, 1080); }
         l.classList.toggle('is-flipped', now);
       });
       book.classList.toggle('is-front', k === 0);
