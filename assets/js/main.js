@@ -214,7 +214,7 @@
       sets.forEach(s => { s.hidden = s.dataset.arc !== k; });
       chipsA.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.set === k)));
       sets.find(s => !s.hidden)?.querySelectorAll('.reveal').forEach(el => el.classList.add('is-in'));
-      if (push) history.replaceState(null, '', location.pathname + (k === 'illu' ? '?set=illustration' : '') + location.hash);      document.documentElement.classList.toggle('arc-olive', k === 'illu');
+      if (push) history.replaceState(null, '', location.pathname + (k === 'photo' ? '?set=photography' : '') + location.hash);      document.documentElement.classList.toggle('arc-olive', k === 'illu');
       placeWash(); oliveScroll();
     };
     // olive backdrop behind the sketches (see CSS: html[data-olive])
@@ -234,7 +234,7 @@
     addEventListener('scroll', oliveScroll, { passive: true });
     addEventListener('resize', placeWash);
     chipsA.forEach(b => b.addEventListener('click', () => show(b.dataset.set, true)));
-    show(new URLSearchParams(location.search).get('set') === 'illustration' ? 'illu' : 'photo', false);
+    show(new URLSearchParams(location.search).get('set') === 'photography' ? 'photo' : 'illu', false);   // illustration first
   }
 
   /* ---------- Lookbook: pages turn like a magazine (click, drag/swipe, buttons or arrow keys) ---------- */
@@ -369,7 +369,15 @@
   /* ---------- Burgundy seams: rise with scroll momentum, settle when you stop ---------- */
   const makeSeam = (el, also) => {
     let lag = 0, target = 0, raf = 0;
-    const set = v => { el.style.setProperty('--lag', v); if (also) document.documentElement.style.setProperty('--endlag', v); };
+    const set = v => { el.style.setProperty('--lag', v);
+      if (also) {
+        document.documentElement.style.setProperty('--endlag', v);
+        // overlap the footer a little (in the footer's own color) so no light line can ever show between them
+        // only when the footer is the same olive as the seam (not on the beige-footer pages)
+        const f = document.querySelector('body > footer');
+        const same = f && getComputedStyle(f).backgroundColor === getComputedStyle(el).backgroundColor;
+        el.style.setProperty('--over', same && v > .5 ? 14 : 0);
+      } };
     const tick = () => {
       lag += (target - lag) * 0.2;
       target *= 0.85;
@@ -498,10 +506,29 @@
       { rootMargin: '-70px 0px 0px 0px' }).observe(hero);
   } else nav?.classList.add('is-solid');
 
+
+  /* ---------- Contact: the line under "Get in touch" starts exactly at the E and ends where the title ends ---------- */
+  const cTitle = document.querySelector('.contact__title'), cLead = document.querySelector('.contact__lead');
+  if (cTitle && cLead) {
+    const fitLead = () => {
+      cLead.style.marginLeft = ''; cLead.style.width = '';
+      if (innerWidth < 961) return;
+      const ln = cTitle.querySelector('.ln'), cap = cTitle.querySelector('.cap');
+      const txt = cap && cap.nextSibling; if (!txt) return;
+      const r = document.createRange(); r.selectNodeContents(txt);
+      const a = r.getBoundingClientRect(), box = cLead.parentElement.getBoundingClientRect();
+      const nudge = 14;   // a touch right of the E, clear of the G's tail
+      cLead.style.marginLeft = (a.left - box.left + nudge) + 'px';
+      cLead.style.width = (a.width - nudge) + 'px';
+    };
+    fitLead(); addEventListener('resize', fitLead);
+    document.fonts && document.fonts.ready.then(fitLead);
+  }
+
   /* ---------- Ticker: duplicate row for a seamless loop ---------- */
   document.querySelectorAll('[data-ticker] .ticker__row').forEach(row => {
     [...row.children].forEach(img => {
-      const c = img.cloneNode(true); c.setAttribute('aria-hidden', 'true'); row.appendChild(c);
+      const c = img.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.setAttribute('tabindex', '-1'); row.appendChild(c);
     });
   });
 

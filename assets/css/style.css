@@ -834,7 +834,6 @@ html:has(.page-about) { background: var(--bg); }
 .contact__text { justify-content: center; gap: 22px; }
 
 /* "What I'm looking for" removed for now (saved separately): the practical sheet follows the intro directly */
-.page-about .about__s3 { margin-top: 0; box-shadow: none; }
 
 /* a project that isn't finished yet: shown, but not clickable */
 .card--soon .card__link { cursor: default; }
@@ -843,9 +842,6 @@ html:has(.page-about) { background: var(--bg); }
 .card__soon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; white-space: nowrap;
   font: 500 11px/1 var(--f-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--bg);
   border: 1px solid currentColor; border-radius: 999px; padding: 9px 16px; background: rgba(40,30,10,.18); backdrop-filter: blur(2px); }
-.page-about .about__s3 > .sheet__edge { display: none; }
-.page-about .about__s1 { min-height: 0; padding-bottom: clamp(40px, 5vw, 70px); }
-.page-about .about__s3 { min-height: 0; padding-top: clamp(50px, 6vw, 90px); }
 
 /* chapter headings: title and text as one centered pair, the title pushed right against the text */
 .pj__txt.pj__chapter { grid-template-columns: auto minmax(0, 34em); justify-content: center; column-gap: clamp(28px, 3.5vw, 56px); align-items: baseline; }
@@ -882,3 +878,135 @@ html:has(.page-about) { background: var(--bg); }
 /* TRY: no parchment texture, flat colors only. To bring it back, delete these two lines */
 :root { --paper: none; }
 body { background-image: none; }
+
+/* featured work: each image opens its project; the loop pauses while you hover */
+.ticker__item { display: block; flex: none; }
+.ticker__item img { transition: opacity .35s var(--ease); }
+.ticker__item:hover img { opacity: .82; }
+.ticker__track:hover .ticker__row { animation-play-state: paused; }
+
+/* end-of-page seam: a few px of the footer's own color below it, so no light line shows while the page lifts */
+.footer::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 6px; background: inherit; pointer-events: none; }
+
+/* ============ Phone fixes (Sept 29) ============ */
+@media (max-width: 860px) {
+  /* home intro: title and line centered above the framed photo */
+  .intro__text { width: 100%; align-items: center; text-align: center; }
+  .intro__title .ln { text-align: center; }
+  .intro__line { margin-inline: auto; }
+  /* the framed photo: no soft shadow or fade on phones, just the photo at full contrast */
+  .intro__framed { filter: none; }
+  .js .intro__photo.reveal { opacity: 1; transform: none; }
+}
+@media (max-width: 900px) {
+  /* about: nothing wider than the screen (the padding was being added on top of 100%) */
+  .about__info { box-sizing: border-box; width: 100%; }
+  .page-about, .about { overflow-x: clip; }
+  /* portrait first, centered, then the text */
+  .about__photo { width: min(72vw, 320px); justify-self: center; }
+  .about__text { align-items: center; }
+  /* bigger camera girl, with room for her under the CV button */
+  .about__camera { height: 360px; }
+  .page-about .about__s3 { padding-bottom: 380px; }
+}
+@media (max-width: 560px) {
+  /* contact: title and line centered over the chickens, title a bit bigger */
+  .contact__text { align-items: center; text-align: center; }
+  .contact__title { font-size: 36px; }
+  .contact__title .ln { text-align: center; }
+  .contact__lead { width: auto; font-size: 18px; }
+}
+
+/* home intro: the line sits right under the title (not pinned to the bottom of the photo) */
+.intro__text { justify-content: flex-start; gap: clamp(22px, 2vw, 30px); }
+.intro__line { width: 24em; }
+/* framed photo: much lighter shadow (about 85% less) and a gentler fade-in */
+.intro__framed { filter: drop-shadow(0 2px 6px rgba(74,60,32,.03)); }
+.js .intro__photo.reveal { opacity: .55; transform: translateY(10px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.js .intro__photo.reveal.is-in { opacity: 1; transform: none; }
+@media (max-width: 860px) { .js .intro__photo.reveal, .intro__framed { opacity: 1; transform: none; filter: none; } }
+@media (max-width: 860px) { .intro__line { width: auto; max-width: 30em; } .intro__text { width: auto; } }
+
+/* home intro: less empty space above and below on desktop */
+@media (min-width: 861px) { .intro { padding-block: clamp(70px, 7.5vw, 115px) clamp(55px, 6vw, 95px); } }
+
+/* TRY: bike on the left end of the ticker */
+.ticker__bike { right: auto; left: var(--gutter); }
+
+/* about: text next to the portrait justified; the second paragraph lives on the pinned beige sheet again */
+.about__text p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+.about__hold { height: 180vh; }
+.about__goal { max-width: 820px; }
+.about__lines { font-size: clamp(18px, 1.45vw, 21px); line-height: 1.65; }
+@media (max-width: 900px) { .about__lines { font-size: 18px; } .about__s2 { padding-block: 80px; } }
+@media (max-width: 900px) {
+  .about__hold { height: auto; }
+  .about__s2 { position: relative; height: auto; padding-block: 70px 90px; }
+  .about__text p { text-align: left; }
+}
+
+/* about: tighter rhythm between the olive intro and the cream sheet */
+.about__s1 { min-height: 0; padding-bottom: clamp(70px, 8vw, 110px); }
+.about__s2 { align-items: flex-start; padding-top: clamp(110px, 14vh, 150px); box-sizing: border-box; }
+.about__lines p { margin: 0 0 1.1em; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+.about__lines p:last-child { margin-bottom: 0; }
+@media (max-width: 900px) { .about__s2 { padding-top: 70px; } .about__lines p { text-align: left; } }
+/* phones: About text justified too, with hyphenation so the word gaps stay even */
+@media (max-width: 900px) {
+  .about__text p, .about__lines p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+}
+.about__frame { aspect-ratio: 1326 / 1600; }
+/* contact: room under the big G, and a slightly wider line so it breaks nicely */
+.contact__text { gap: 34px; }
+.contact__lead { width: 17.5em; }
+@media (max-width: 560px) { .contact__text { gap: 22px; } .contact__lead { width: auto; } }
+/* contact: same sizes as the home intro title and line */
+.contact__title { font-size: clamp(30px, 3.3vw, 47px); }
+.contact__lead { font-size: clamp(17px, 1.35vw, 19px); line-height: 1.4; width: 19em; }
+@media (max-width: 560px) { .contact__title { font-size: 36px; } .contact__lead { width: auto; font-size: 18px; } }
+@media (min-width: 561px) { .contact__text { gap: 44px; } }
+
+/* ============ Contact · layout E: title + illustration on the left, full-height form on the right ============ */
+@media (min-width: 961px) {
+  .contact__grid { max-width: 1000px; display: grid; justify-content: center; align-items: stretch;
+    grid-template-columns: minmax(0, 470px) minmax(0, 400px); grid-template-areas: 't f' 'c f';
+    column-gap: clamp(50px, 6vw, 80px); row-gap: 26px; }
+  .contact__intro { display: contents; }
+  .contact__text { grid-area: t; display: block; }
+  .contact__title { font-size: 62px; }
+  .contact__lead { margin: 4px 0 0; max-width: none; }          /* left edge + width are set in JS to match "et in touch" */
+  .contact__chickens { grid-area: c; width: 430px; max-width: 100%; justify-self: start; align-self: end; }
+  .contact__formwrap { grid-area: f; display: flex; flex-direction: column; max-width: none; }
+  .contact__form { display: flex; flex-direction: column; flex: 1; }
+  .contact__form .field--msg { flex: 1; display: flex; }
+  .contact__form .field--msg textarea { flex: 1; height: auto; resize: none; }
+  .contact__thanks { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .contact { padding-top: clamp(110px, 12vw, 150px); }
+}
+/* contact: "et in touch" in dusty rose like the home title, the G stays burgundy */
+.contact__title { color: var(--light-heading); }
+.contact__title .cap { color: var(--accent); }
+@media (min-width: 961px) { .contact__lead { margin-top: -4px; } }
+/* phones: title, then the chickens, then the line */
+@media (max-width: 960px) {
+  .contact__text { display: contents; }
+  .contact__intro { justify-items: center; }
+  .contact__title { order: 1; }
+  .contact__chickens { order: 2; }
+  .contact__lead { order: 3; text-align: center; margin-top: 4px; }
+}
+/* centred paragraphs that should read as a block */
+.pj__center--just p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+/* centred text between images: same breathing room above and below */
+.pj__center { padding-top: clamp(34px, 3.8vw, 54px); }
+/* chapter headings (Interpretation of Forms): title centered, text centered underneath */
+.pj__txt.pj__chapter { grid-template-columns: 1fr; justify-content: center; justify-items: center; text-align: center; row-gap: 14px; }
+.pj__txt.pj__chapter .pj__label { grid-column: 1; justify-self: center; text-align: center; }
+.pj__txt.pj__chapter .pj__body { grid-column: 1; max-width: 36em; }
+.pj__txt.pj__chapter .pj__body p { margin-inline: auto; }
+@media (max-width: 900px) { .pj__txt.pj__chapter .pj__label, .pj__txt.pj__chapter .pj__body { justify-self: center; text-align: center; } }
+
+/* end seam: grows a few px into the footer so the join is always seamless (color set in JS to match the footer) */
+.end-seam { transform: scaleY(calc((var(--lag, 0) + var(--over, 0)) / 90)); }
+/* featured work: keep scrolling even while hovering */
+.ticker__track:hover .ticker__row { animation-play-state: running; }
