@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lucía Tapia — Creative & Art Direction</title>
+  <meta name="description" content="Portfolio of Lucía Tapia García, a creative based in Boston working across branding, advertising, illustration and editorial design.">
+  <link rel="preload" href="assets/fonts/zt-bros-oskon.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/aston-script.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/hero-bg.webp" as="image">
+  <link rel="stylesheet" href="assets/css/style.css?v=09291600">
+</head>
+<body class="page-home">
+
+  <header class="nav" data-nav>
+    <a class="nav__logo" href="#top" aria-label="Lucía Tapia — back to top"><span class="logo-mark"></span></a>
+    <nav class="nav__links" aria-label="Main">
+      <a href="work.html" data-i18n="nav.work">Work</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="archive.html" data-i18n="nav.archive">Archive</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1 · HERO — the only full-bleed moment on the site -->
+    <div class="hero-wrap">
+    <section class="hero" id="top" aria-label="Lucía Tapia">
+      <div class="hero__bg"><div class="hero__sway" style="background-image:url('assets/img/hero-bg.webp')"></div></div>
+      <nav class="hero__nav" aria-label="Main">
+        <a href="work.html" data-i18n="nav.work">Work</a>
+        <a href="about.html" data-i18n="nav.about">About</a>
+        <a href="archive.html" data-i18n="nav.archive">Archive</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <h1 class="hero__logo">
+        <img src="assets/img/logo-hero-cream.svg" alt="Lucía Tapia" width="766" height="476" data-logo>
+      </h1>
+      <a class="hero__scroll" href="#intro"><span aria-hidden="true">↓</span> <span data-i18n="hero.scroll">scroll</span></a>
+    </section>
+    <div class="seam" aria-hidden="true"></div>
+    </div>
+
+    <!-- 2 · INTRO — centered container: big text top-left, small text bottom-left, photo right -->
+    <section class="intro wrap" id="intro">
+      <div class="intro__inner">
+        <div class="intro__text">
+          <p class="intro__title reveal" role="heading" aria-level="2">
+            <span data-i18n-html="intro.title"><span class="ln">Hi! I’m <span class="name"><span class="cap">L</span>ucía</span>, a</span> <span class="ln">creative currently</span> <span class="ln">based in <span class="name"><span class="cap">B</span>oston</span>.</span></span>
+          </p>
+          <p class="intro__line reveal" data-i18n="intro.line">Passionate about strategic communication and visual storytelling, my work spans branding, advertising, illustration, and art direction.</p>
+        </div>
+        <figure class="intro__photo reveal">
+          <img class="intro__framed" src="assets/img/portrait-framed.webp" alt="Lucía Tapia, framed in lace" width="969" height="1400" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <!-- 3 · FEATURED WORK — continuous sideways scroll, images only -->
+    <section class="ticker" aria-labelledby="ticker-title">
+      <div class="wrap ticker__head">
+        <h2 class="ticker__title reveal" id="ticker-title" data-i18n="work.title">Featured work</h2>
+        <a class="btn reveal" href="work.html" data-i18n="work.cta">View</a>
+      </div>
+      <div class="ticker__track" data-ticker>
+        <div class="ticker__row">
+          <img src="assets/img/feat-1.webp" alt="" width="512" height="640">
+          <img src="assets/img/feat-2.webp" alt="" width="960" height="640">
+          <img src="assets/img/feat-3.webp" alt="" width="512" height="640">
+          <img src="assets/img/feat-4.webp" alt="" width="752" height="640">
+          <img src="assets/img/feat-5.webp" alt="" width="512" height="640">
+          <img src="assets/img/feat-6.webp" alt="" width="664" height="640">
+          <img src="assets/img/feat-7.webp" alt="" width="916" height="640">
+          <!-- repeated so the loop stays seamless on wide screens -->
+          <img src="assets/img/feat-1.webp" alt="" aria-hidden="true" width="512" height="640">
+          <img src="assets/img/feat-2.webp" alt="" aria-hidden="true" width="960" height="640">
+          <img src="assets/img/feat-3.webp" alt="" aria-hidden="true" width="512" height="640">
+          <img src="assets/img/feat-4.webp" alt="" aria-hidden="true" width="752" height="640">
+          <img src="assets/img/feat-5.webp" alt="" aria-hidden="true" width="512" height="640">
+          <img src="assets/img/feat-6.webp" alt="" aria-hidden="true" width="664" height="640">
+          <img src="assets/img/feat-7.webp" alt="" aria-hidden="true" width="916" height="640">
+        </div>
+      </div>
+      <!-- bike sits on top of the footer, overlapping the end of the ticker -->
+      <img class="ticker__bike" src="assets/img/bike.webp" alt="" width="770" height="900" loading="lazy" aria-hidden="true">
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <ul class="footer__links">
+      <li><a href="mailto:luciatapiaag@gmail.com">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/luc%C3%ADa-tapia-garc%C3%ADa-0a97b5249/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+      <li><a href="https://www.instagram.com/by.luciatapia/" target="_blank" rel="noopener">Instagram ↗</a></li>
+      <li>© 2026, Lucía Tapia García</li>
+    </ul>
+    <button type="button" class="to-top" data-to-top aria-label="Back to top"><span aria-hidden="true">↑</span> <span data-i18n="footer.top">top</span></button>
+    <p class="footer__case"><span data-i18n="footer.case">Website designed as part of my own brand identity:</span> <a href="work/personal-brand.html" class="script-link" data-i18n="footer.caseLink">read the case study →</a></p>
+  </footer>
+
+  <script src="assets/js/main.js?v=09291600"></script>
+</body>
+</html>
