@@ -1026,3 +1026,29 @@ body { background-image: none; }
 .leaf__f, .leaf__b { transform-style: flat; }
 .leaf__b { transform: rotateY(180deg) translateZ(.1px); }
 .leaf__f { transform: translateZ(.1px); }
+
+/* Personal Brand: phone mockups centered and larger; text below on desktop, above on phones */
+.pj__fc { display: flex; flex-direction: column; align-items: center; text-align: center; padding: clamp(40px, 5vw, 70px) var(--side) clamp(40px, 5vw, 70px); }
+.pj__fc > .pj__frame { width: min(78%, 980px); order: 1; cursor: zoom-in; }
+.pj__fc-txt { order: 2; margin-top: 0; }
+.pj__fc-txt p { margin: 0 auto 1em; max-width: 34em; font: 400 clamp(13.5px, 1vw, 15px)/1.7 var(--f-ui); color: var(--text); }
+.pj__fc-link { order: 3; margin-top: .6em; }
+@media (max-width: 760px) {
+  .pj__fc { padding-top: clamp(30px, 8vw, 50px); }
+  .pj__fc-txt { order: 0; margin: 0 0 18px; }
+  .pj__fc > .pj__frame { width: 100%; cursor: default; }
+}
+
+/* home framed photo: full contrast on desktop too (no soft shadow, no fade) */
+.intro__framed { filter: none; }
+.js .intro__photo.reveal, .js .intro__photo.reveal.is-in { opacity: 1; transform: none; transition: none; }
+
+/* archive couch: a touch lower so it sits right on the line, no gap */
+@media (min-width: 701px) { .arc__couch { bottom: -37px; z-index: 2; } }
+@media (max-width: 700px) { .arc__couch { bottom: -37px; z-index: 2; } }
+
+/* phones: every text block keeps a proper side margin inside the sheet (never flush to the edge) */
+@media (max-width: 760px) {
+  .pj__center, .pj__side-txt, .pj__fc-txt { padding-left: var(--side); padding-right: var(--side); }
+  .pj__fc { padding-left: 0; padding-right: 0; }
+}
