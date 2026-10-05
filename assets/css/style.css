@@ -838,7 +838,7 @@ html:has(.page-about) { background: var(--bg); }
 /* a project that isn't finished yet: shown, but not clickable */
 .card--soon .card__link { cursor: default; }
 .card--soon .card__media { position: relative; }
-.card--soon .card__media img { filter: saturate(.75) brightness(.92); }
+.card--soon .card__media img { filter: grayscale(1) sepia(.28) contrast(.94) brightness(.94); }
 .card__soon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; white-space: nowrap;
   font: 500 11px/1 var(--f-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--bg);
   border: 1px solid currentColor; border-radius: 999px; padding: 9px 16px; background: rgba(40,30,10,.18); backdrop-filter: blur(2px); }
