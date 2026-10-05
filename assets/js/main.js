@@ -27,7 +27,7 @@
     'cat.branding': 'Branding',
     'cat.campaign': 'Campaña',
     'cat.illustration': 'Ilustración',
-    'desc.personal-brand': 'Identidad visual, Estrategia de marca',
+    'desc.personal-brand': 'Identidad visual, Estrategia de marca y contenido',
     'desc.el-herrete': 'Identidad visual, Ilustración y motion graphics',
     'desc.adjuah': 'Concepto de identidad, Proyecto propio',
     'desc.givenchy': 'Estudio de ilustración de moda',

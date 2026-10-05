@@ -1052,3 +1052,7 @@ body { background-image: none; }
   .pj__center, .pj__side-txt, .pj__fc-txt { padding-left: var(--side); padding-right: var(--side); }
   .pj__fc { padding-left: 0; padding-right: 0; }
 }
+
+/* about: no camera illustration any more, so no extra room under the info */
+.about__s3 { padding-bottom: clamp(110px, 12vw, 140px); }
+@media (max-width: 860px) { .about__s3, .page-about .about__s3 { padding-bottom: 90px; } }
