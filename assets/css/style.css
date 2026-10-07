@@ -1056,3 +1056,6 @@ body { background-image: none; }
 /* about: no camera illustration any more, so no extra room under the info */
 .about__s3 { padding-bottom: clamp(110px, 12vw, 140px); }
 @media (max-width: 860px) { .about__s3, .page-about .about__s3 { padding-bottom: 90px; } }
+
+/* archive couch on desktop: a little smaller, still resting on the line */
+@media (min-width: 701px) { .arc__couch { height: calc(var(--tfs) * 2.9 + 30px); } }
