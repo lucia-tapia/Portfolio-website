@@ -1059,3 +1059,52 @@ body { background-image: none; }
 
 /* archive couch on desktop: a little smaller, still resting on the line */
 @media (min-width: 701px) { .arc__couch { height: calc(var(--tfs) * 2.9 + 30px); } }
+
+/* ============ AI Image Generation: a library of entries, each a title + images + deck ============ */
+.lab__entry + .lab__entry { margin-top: clamp(60px, 8vw, 120px); }
+.lab__head { text-align: center; padding: 0 var(--side) clamp(26px, 3vw, 40px); }
+.lab__num { margin: 0 0 .5em; font: 500 11.5px/1 var(--f-ui); letter-spacing: .16em; color: var(--light-heading); }
+.lab__title { margin: 0; font: 400 clamp(22px, 2vw, 30px)/1.15 var(--f-caps); text-transform: uppercase; letter-spacing: .04em; color: var(--accent); }
+.pj__single.lab__wide > .pj__frame { flex-basis: 100%; width: 100%; }
+.pj__single.lab__model > .pj__frame { flex-basis: min(46%, 520px); width: min(46%, 520px); }
+.lab__deckrow { display: block; padding: clamp(40px, 5vw, 80px) 0 clamp(20px, 3vw, 40px); }
+.deck { position: relative; width: min(100% - 2 * clamp(44px, 5vw, 80px), 1100px); margin-inline: auto; outline: none; }
+.deck__stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #fff; box-shadow: 0 14px 40px -18px rgba(48, 31, 5, .35); touch-action: pan-y; }
+.deck__stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .45s var(--ease); pointer-events: none; }
+.deck__stage img.is-on { opacity: 1; }
+.deck__btn { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 0; padding: 10px; font: 300 24px/1 var(--f-ui); color: var(--text); opacity: .75; cursor: pointer; }
+.deck__btn:hover { opacity: 1; color: var(--accent); }
+.deck__btn:disabled { opacity: .2; cursor: default; }
+.deck__prev { right: 100%; margin-right: clamp(4px, 1vw, 16px); }
+.deck__next { left: 100%; margin-left: clamp(4px, 1vw, 16px); }
+.deck__count { margin: 18px 0 0; text-align: center; font: 400 12px/1 var(--f-ui); letter-spacing: .12em; color: var(--text); }
+@media (max-width: 760px) {
+  .pj__single.lab__model > .pj__frame { flex-basis: 72%; width: 72%; }
+  .deck { width: 100%; }
+  .deck__btn { top: auto; bottom: -46px; transform: none; font-size: 22px; }
+  .deck__prev { right: auto; left: calc(50% - 90px); margin: 0; }
+  .deck__next { left: auto; right: calc(50% - 90px); margin: 0; }
+  .deck__count { margin-top: 26px; }
+}
+
+/* AI Image Generation: after the big hero, the rest sit in a loose gallery like the Archive */
+.lab__gallery { padding: clamp(50px, 6vw, 90px) var(--side) 0; }
+.lab__row { display: flex; align-items: flex-start; }
+.lab__item { flex: none; margin: 0; line-height: 0; cursor: zoom-in; }
+.lab__item img { width: 100%; height: auto; transition: transform .8s var(--ease), box-shadow .8s var(--ease); }
+.lab__item:hover img { transform: scale(1.015); box-shadow: 0 12px 30px rgba(48,31,5,.14); }
+@media (max-width: 700px) {
+  .lab__row { flex-wrap: wrap; margin-top: 40px !important; }
+  .lab__row:first-child { margin-top: 0 !important; }
+  .lab__item { width: 72% !important; margin: 0 !important; }
+  .lab__row:nth-child(even) .lab__item { margin-left: 28% !important; }
+  .lab__row .lab__item + .lab__item { margin-top: 40px !important; margin-left: 28% !important; }
+}
+
+/* home: footer pulled up so the bike rolls right on the green; "top" sits in the narrower gap */
+.page-home .ticker { padding-bottom: clamp(40px, 3.6vw, 52px); }
+.page-home .ticker__bike { bottom: -3px; }
+.page-home .to-top { margin-bottom: clamp(8px, .9vw, 13px); }
+@media (max-width: 700px) { .page-home .to-top { left: auto; right: var(--gutter); transform: none; } }
+/* the bike now lives in the footer itself, so it always rests on the green line */
+.page-home .footer .ticker__bike { position: absolute; top: auto; bottom: calc(100% - 3px); left: var(--gutter); right: auto; z-index: 5; }

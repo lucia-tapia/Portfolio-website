@@ -64,7 +64,7 @@
     'about.langs': 'Español, nativo · Inglés, nativo · Italiano, C1',
     'about.tools': 'Herramientas',
     'about.ai': 'Explorando herramientas y flujos de trabajo con IA para apoyar mi proceso creativo.',
-    'about.cv': 'Descarga mi CV',
+    'about.cv': 'Ver mi CV',
     'contact.title': '<span class="ln">¡<span class="cap">C</span>reemos</span> <span class="ln">algo</span> <span class="ln">juntos!</span>',
     'contact.lead': '¡Me encantará saber de ti! :)',
     'contact.emailLabel': 'Escríbeme a',
@@ -138,6 +138,18 @@
     addEventListener('blur', () => dot.classList.remove('is-visible'));
     addEventListener('pointerdown', () => dot.classList.add('is-down'));
     addEventListener('pointerup', () => dot.classList.remove('is-down'));
+    // pinch-zoom (trackpad or browser zoom gesture): the dot can't follow a zoomed view, so hand back
+    // the normal cursor while zoomed in and bring the dot back when the page is at 100% again
+    const vv = window.visualViewport;
+    if (vv) {
+      const onZoom = () => {
+        const zoomed = vv.scale > 1.01;
+        document.documentElement.classList.toggle('has-cursor', !zoomed);
+        dot.style.display = zoomed ? 'none' : '';
+      };
+      vv.addEventListener('resize', onZoom); vv.addEventListener('scroll', onZoom);
+      onZoom();
+    }
     const hoverSel = 'a, button, [role="button"], label, summary';
     document.addEventListener('pointerover', e => { if (e.target.closest(hoverSel)) dot.classList.add('is-hover'); });
     document.addEventListener('pointerout', e => {
@@ -544,3 +556,26 @@
   }), { threshold: .15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 })();
+
+/* ---------- Deck viewer: one page at a time, arrows on each side, swipe and arrow keys ---------- */
+document.querySelectorAll('[data-deck]').forEach(deck => {
+  const pages = [...deck.querySelectorAll('.deck__stage img')];
+  const prev = deck.querySelector('[data-deck-prev]'), next = deck.querySelector('[data-deck-next]');
+  const count = deck.parentElement.querySelector('[data-deck-count]');
+  const pad = n => String(n).padStart(2, '0');
+  let k = 0;
+  const show = n => {
+    k = Math.max(0, Math.min(pages.length - 1, n));
+    pages.forEach((p, i) => p.classList.toggle('is-on', i === k));
+    [k - 1, k + 1].forEach(j => { if (pages[j]) pages[j].loading = 'eager'; });   // the neighbours are ready before you get there
+    prev.disabled = k === 0; next.disabled = k === pages.length - 1;
+    if (count) count.textContent = pad(k + 1) + ' / ' + pad(pages.length);
+  };
+  prev.addEventListener('click', () => show(k - 1));
+  next.addEventListener('click', () => show(k + 1));
+  deck.addEventListener('keydown', e => { if (e.key === 'ArrowRight') show(k + 1); else if (e.key === 'ArrowLeft') show(k - 1); });
+  const stage = deck.querySelector('.deck__stage'); let sx = null;
+  stage.addEventListener('pointerdown', e => { sx = e.clientX; });
+  stage.addEventListener('pointerup', e => { if (sx === null) return; const dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 40) show(k + (dx < 0 ? 1 : -1)); });
+  show(0);
+});
