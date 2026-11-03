@@ -1108,3 +1108,30 @@ body { background-image: none; }
 @media (max-width: 700px) { .page-home .to-top { left: auto; right: var(--gutter); transform: none; } }
 /* the bike now lives in the footer itself, so it always rests on the green line */
 .page-home .footer .ticker__bike { position: absolute; top: auto; bottom: calc(100% - 3px); left: var(--gutter); right: auto; z-index: 5; }
+
+/* Chief Adjuah: tighter rhythm, smaller palette and logo explanation */
+.pj--tight .pj__txt { padding-block: clamp(28px, 3.4vw, 48px); }
+.pj--tight .pj__row--text + .pj__txt { padding-top: clamp(16px, 2vw, 28px); }
+.pj--tight .pj__intro { padding-bottom: clamp(16px, 2vw, 30px); }
+.adj__fig { display: flex; justify-content: center; padding: clamp(6px, 1vw, 14px) var(--side) clamp(18px, 2.4vw, 34px); }
+.adj__fig img { display: block; height: auto; }
+.adj__fig--small img { width: min(46%, 520px); }
+.adj__fig--mid img { width: min(68%, 820px); }
+@media (max-width: 760px) { .adj__fig--small img { width: 78%; } .adj__fig--mid img { width: 100%; } }
+/* Chief Adjuah: even gaps above and below the smaller pieces */
+.pj--tight .pj__txt { padding-bottom: clamp(14px, 1.6vw, 22px); margin-bottom: 0; }
+.pj--tight .pj__txt .pj__body p:last-child { margin-bottom: 0; }
+.adj__fig { padding-top: 0; padding-bottom: clamp(30px, 3.4vw, 48px); margin-bottom: 0; }
+.adj__duo { display: grid; grid-template-columns: 1fr 1fr; align-items: center; justify-items: center; padding: clamp(30px, 3.4vw, 48px) var(--side); }
+.adj__duo img { display: block; height: auto; max-height: min(78vh, 760px); width: auto; max-width: 82%; }
+@media (max-width: 760px) { .adj__duo { grid-template-columns: 1fr; row-gap: 28px; } .adj__duo img { max-width: 86%; max-height: none; } }
+.adj__fig { padding-top: clamp(14px, 1.6vw, 20px); padding-bottom: clamp(14px, 1.6vw, 20px); }
+.adj__fig + .pj__row { margin-top: 0; }
+.adj__duo { padding-block: clamp(14px, 1.6vw, 20px); }
+.adj__fig { padding-bottom: clamp(22px, 2.4vw, 30px); }
+/* Chief Adjuah: equal space above and below everything (≈ the paragraph's top margin) */
+.pj--tight .pj__txt { padding-bottom: clamp(28px, 3.4vw, 48px); }
+.adj__fig { padding-top: 0; padding-bottom: clamp(8px, 1.4vw, 28px); }
+.adj__duo { padding-block: clamp(8px, 1.4vw, 28px); }
+.pj--tight .pj__txt { padding-bottom: calc(clamp(28px, 3.4vw, 48px) + var(--g)); }
+.adj__fig { padding-bottom: calc(clamp(28px, 3.4vw, 48px) + var(--g)); }
