@@ -1135,3 +1135,10 @@ body { background-image: none; }
 .adj__duo { padding-block: clamp(8px, 1.4vw, 28px); }
 .pj--tight .pj__txt { padding-bottom: calc(clamp(28px, 3.4vw, 48px) + var(--g)); }
 .adj__fig { padding-bottom: calc(clamp(28px, 3.4vw, 48px) + var(--g)); }
+/* AI gallery on phones: a steady left/right zig-zag, image by image */
+@media (max-width: 700px) {
+  .lab__row .lab__item, .lab__row:nth-child(even) .lab__item, .lab__row .lab__item + .lab__item { margin-left: 0 !important; margin-top: 40px !important; }
+  .lab__row .lab__item.lab__item--r { margin-left: 28% !important; }
+  .lab__row:first-child .lab__item:first-child { margin-top: 0 !important; }
+  .lab__row { margin-top: 0 !important; }
+}
